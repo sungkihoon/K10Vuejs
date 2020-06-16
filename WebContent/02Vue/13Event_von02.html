@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13Event_von02.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>       
+        $(function () {
+            var vue = new Vue({
+                el: '#app',
+                data: {
+                    title: '이벤트처리와 methods',
+                    amount : 0, balance : 0
+                },
+                methods : {
+                    deposit:function(){
+                        var amt = parseInt(this.amount);
+                        if ( amt<=0){
+                            alert("0보다 큰 값을 예금해야 합니다.");
+                        }else{
+                            this.balance += amt;
+                        }
+                    },
+                    withdraw:function(){
+                        var amt = parseInt(this.amount);
+                        if(amt <= 0){
+                            alert("0보다 작은 금액은 인출할 수 없습니다");
+                        }else if(amt > this.balance){
+                            alert("잔고보다 많은 금액을 인출할 수 없습니다.");
+                        }else{
+                            this.balance -= amt;
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <p>
+            금액입력 : <input type="text" v-model="amount">
+        </p>
+        <p>
+            <button type='button' @click="deposit()">예금</button>
+            <button type='button' v-on:click="withdraw">출금</button>
+        </p>
+        <h3>현재잔고 : {{balance}}</h3>
+    </div>
+</body>
+</html>
